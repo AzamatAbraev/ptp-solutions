@@ -1,0 +1,165 @@
+.dashboard-sider {
+  height: 100vh !important;
+}
+
+.locked {
+  color: #fff !important;
+}
+
+.dashboard-account-badge {
+  padding: 2px 5px;
+  background-color: transparent;
+  border-radius: 4px;
+  border: 1px solid #fff;
+}
+
+.dashboard-logo {
+  color: #fff;
+  padding: 24px;
+  font-size: 20px;
+  width: 200px;
+}
+
+.dashboard-main {
+  margin: 0 !important;
+  overflow: auto !important;
+  height: calc(100vh - 64px) !important;
+}
+
+.dashboard-header {
+  border-left: 1px solid #fff !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.notification {
+  margin-right: 20px;
+  border-radius: 6px;
+  display: flex;
+  svg {
+    padding: 2px 4px;
+    border: 1px solid #fff;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: 0.5s ease;
+    height: 30px;
+    width: 40px;
+  }
+}
+
+.notification-open {
+  right: 20px;
+  transition: 0.8s ease !important;
+}
+
+.notification-close {
+  right: -300px;
+  transition: 0.8s ease !important;
+}
+
+.notification-content {
+  position: fixed;
+  min-width: 200px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 10px;
+  padding-left: 10px;
+  max-height: 70vh;
+  top: 70px;
+  z-index: 10;
+  background-color: #1677ff;
+  border-radius: 10px;
+
+  &-title {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  &-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+  }
+
+  &-user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 20px;
+
+    p {
+      margin-bottom: 0;
+      color: #fff;
+      min-width: 130px;
+    }
+  }
+
+  &-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    button {
+      cursor: pointer;
+      padding: 3px 5px;
+      // background-color: #1677ff;
+      color: #fff;
+      border: none;
+      font-size: 16px;
+      transition: 0.5s ease;
+    }
+    .disabled {
+      opacity: 0.5;
+      cursor: auto;
+    }
+  }
+
+  .close-btn {
+    background-color: #1677ff;
+    color: #fff;
+    border-radius: 4px;
+    padding: 5px 10px;
+    border: 1px solid #fff;
+    cursor: pointer;
+    transition: 0.5s ease;
+    &:hover {
+      border: 1px solid #fff;
+      background-color: #fff;
+      color: #1677ff;
+    }
+  }
+
+  .upgrade-btn {
+    background-color: #28a745;
+    color: #fff;
+    padding: 3px 5px;
+    border-radius: 4px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: 0.5s ease;
+    &:hover {
+      background-color: #fff;
+      color: #28a745;
+    }
+  }
+}
+
+.ant-menu-item-selected {
+  border: 1px solid #fff;
+}
+
+.dashboard-header svg {
+  fill: #fff;
+}
+
+.menu {
+  a {
+    font-family: "Poppins";
+  }
+}
