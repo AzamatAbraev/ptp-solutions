@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { Button, Flex, Form, Image, Input, Modal } from "antd";
+import { Button, Flex, Form, Input, Modal } from "antd";
 import { useNavigate } from "react-router-dom";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 import useAuth from "../../../zustand/auth";
 import Loader from "../../../components/loader/Loader";
-import { getUserImage } from "../../../utils/getImage";
 
 import "react-tabs/style/react-tabs.css";
 import "./style.scss";
@@ -18,10 +17,7 @@ const AccountPage = () => {
 
   const {
     loading,
-    photo,
-    accountInfo,
     updateAccount,
-    uploadPhoto,
     logout,
     updatePassword,
     getAccountInfo,
@@ -72,24 +68,20 @@ const AccountPage = () => {
                   <Form.Item>
                     <h2 className="register__title">Account Info</h2>
                   </Form.Item>
-                  <div className="upload-image-container">
+                  {/* <div className="upload-image-container">
                     <Image
                       className="account-image"
                       style={{
                         width: "100%",
                       }}
-                      src={
-                        photo
-                          ? getUserImage(photo)
-                          : getUserImage(accountInfo.photo)
-                      }
+                      src={getUserImage(photo)}
                     />
                     <input
                       className="upload-btn register-input"
                       type="file"
                       onChange={(e) => uploadPhoto(e)}
                     />
-                  </div>
+                  </div> */}
                   <Form.Item
                     label="First name"
                     name="firstName"
