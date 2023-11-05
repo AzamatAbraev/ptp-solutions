@@ -13,7 +13,6 @@ interface AuthType {
   loading: boolean;
   photo: string;
   accountInfo: [];
-  callback: boolean;
   login: (form: FormInstance, navigate: NavigateFunction) => void;
   logout: (navigate: NavigateFunction) => void;
   register: (form: FormInstance, navigate: NavigateFunction) => void;
@@ -21,13 +20,11 @@ interface AuthType {
   uploadPhoto: (e: React.ChangeEvent<HTMLInputElement>) => void;
   updatePassword: (form: FormInstance, navigate: NavigateFunction) => void;
   getAccountInfo: (form: FormInstance) => void;
-  setCallback: () => void;
 }
 
-const useAuth = create<AuthType>()((set, get) => ({
+const useAuth = create<AuthType>()((set) => ({
   isAuthenticated: Boolean(Cookies.get(TOKEN)),
   isLoading: false,
-  callback: false,
   role: Cookies.get(ROLE) || null,
   loading: false,
   photo: "",
@@ -142,7 +139,6 @@ const useAuth = create<AuthType>()((set, get) => ({
 
   getAccountInfo: async (form) => {
     try {
-      const callBack = get().callback;
       const { data } = await request.get("auth/me");
       const newData = { ...data, birthday: data.birthday?.split("T")[0] };
       set((state) => ({ ...state, accountInfo: newData }));
@@ -156,11 +152,6 @@ const useAuth = create<AuthType>()((set, get) => ({
         );
       }
     }
-  },
-
-  setCallback: () => {
-    const callback = get().callback;
-    set((state) => ({ ...state, callback: !callback }));
   },
 }));
 

@@ -11,7 +11,7 @@ interface NotificationType {
   notification: boolean,
   getUsers: () => void;
   setNotification: (bool: boolean) => void;
-  setPage: (number: number) => [],
+  setPage: (number: number) => void,
   handleSearch: (value: string) => void;
   upgradeToClient: (id: string) => void;
 }
