@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 
 import {
@@ -10,11 +11,9 @@ import {
   TeamOutlined,
   UserOutlined,
   WhatsAppOutlined,
-  LeftOutlined,
-  RightOutlined,
 } from "@ant-design/icons";
 
-import { Layout, Menu, Button, Modal, Badge, Flex, Input, Spin } from "antd";
+import { Layout, Menu, Button, Modal, Badge, Flex } from "antd";
 
 import Sider from "antd/es/layout/Sider";
 import account from "../../../assets/images/account.svg";
@@ -22,13 +21,12 @@ import account from "../../../assets/images/account.svg";
 import { Content, Header } from "antd/es/layout/layout";
 import useAuth from "../../../zustand/auth";
 
-import useNotification from "antd/es/notification/useNotification";
-
 import "./style.scss";
 
 const AdminLayout = () => {
   const { role, logout } = useAuth();
-  const {isFetching, notification, search, page, users, setNotification, setPage, handleSearch, upgradeToClient, getUsers} = useNotification();
+  const [collapsed, setCollapsed] = useState(false);
+  // const {isFetching, notification, search, page, users, setNotification, setPage, handleSearch, upgradeToClient, getUsers} = useNotification();
   const navigate = useNavigate();
   return (
     <Layout>
@@ -36,11 +34,10 @@ const AdminLayout = () => {
         className="dashboard-sider"
         trigger={null}
         collapsible
-        collapsed={false}
+        collapsed={collapsed}
       >
         <h3 className="dashboard-logo">
-          {/* {collapsed ? "PTP" : "PTP Solutions"} */}
-          PTP Solutions
+          {collapsed ? "PTP" : "PTP Solutions"}
         </h3>
         <Menu
           className="menu"
@@ -120,6 +117,7 @@ const AdminLayout = () => {
         >
           <Button
             type="text"
+            onClick={() => setCollapsed(!collapsed)}
             icon={<MenuFoldOutlined />}
             style={{
               fontSize: "16px",
@@ -127,7 +125,7 @@ const AdminLayout = () => {
               height: 64,
             }}
           />
-          <Flex align="center" gap={10} >
+          <Flex align="center" gap={10}>
             <Link to="/dashboard" className="notification">
               <Badge className="dashboard-badge" count={0} size="small">
                 <svg
@@ -156,7 +154,7 @@ const AdminLayout = () => {
           <Outlet />
         </Content>
       </Layout>
-      <div
+      {/* <div
         className={`notification-content ${
           notification ? "notification-open" : "notification-close"
         }`}
@@ -180,7 +178,7 @@ const AdminLayout = () => {
           tip="Loading"
           spinning={isFetching}
         >
-          {/* {users.map((user) => (
+          {users.map((user) => (
             <div key={user?._id} className="notification-content-user">
               <p>{user?.firstName.slice(0, 25)}</p>
               <button
@@ -196,7 +194,7 @@ const AdminLayout = () => {
                 Upgrade
               </button>
             </div>
-          ))} */}
+          ))}
         </Spin>
         <div className="notification-content-footer">
           <div className="notification-content-pagination">
@@ -220,7 +218,7 @@ const AdminLayout = () => {
             Close
           </button>
         </div>
-      </div>
+      </div> */}
     </Layout>
   );
 };
