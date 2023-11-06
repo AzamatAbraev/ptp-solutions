@@ -37,11 +37,10 @@ const useAuth = create<AuthType>()((set) => ({
   login: async (form, navigate) => {
     try {
       const values = await form.validateFields();
-      set({ loading: true });
-
       const {
         data: { token, user },
       } = await request.post("auth/login", values);
+      set({ loading: true });
       Cookies.set(TOKEN, token);
       Cookies.set(ROLE, user.role);
       set({ role: user.role });
