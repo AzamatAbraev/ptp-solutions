@@ -65,22 +65,38 @@ const AdminLayout = () => {
             {
               key: "/portfolios",
               icon: <DatabaseOutlined />,
-              label: <Link to="/portfolios">Portfolios</Link>,
+              label: (
+                <Link to={role === "user" ? "/dashboard" : "/portfolios"}>
+                  Portfolios {role === "user" ? <LockOutlined /> : ""}
+                </Link>
+              ),
             },
             {
               key: "/education",
               icon: <ReadOutlined />,
-              label: <Link to="/education">Education</Link>,
+              label: (
+                <Link to={role === "user" ? "/dashboard" : "/education"}>
+                  Education {role === "user" ? <LockOutlined /> : ""}
+                </Link>
+              ),
             },
             {
               key: "/experience",
               icon: <ClockCircleOutlined />,
-              label: <Link to="/experience">Experience</Link>,
+              label: (
+                <Link to={role === "user" ? "/dashboard" : "/experience"}>
+                  Experience {role === "user" ? <LockOutlined /> : ""}
+                </Link>
+              ),
             },
             {
               key: "/skills",
               icon: <LockOutlined />,
-              label: <Link to="/skills">Skills</Link>,
+              label: (
+                <Link to={role === "user" ? "/dashboard" : "/skills"}>
+                  Skills {role === "user" ? <LockOutlined /> : ""}
+                </Link>
+              ),
             },
             role === "admin"
               ? {

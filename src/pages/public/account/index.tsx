@@ -15,13 +15,8 @@ const AccountPage = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const {
-    loading,
-    updateAccount,
-    logout,
-    updatePassword,
-    getAccountInfo,
-  } = useAuth();
+  const { loading, updateAccount, logout, updatePassword, getAccountInfo } =
+    useAuth();
 
   useEffect(() => {
     setIsLoading(true);
@@ -201,7 +196,7 @@ const AccountPage = () => {
                   <div>
                     <div className="register__subinfo">
                       <p>Do you want to change log out ? </p>
-                      <Button
+                      <Button type="primary" danger
                         onClick={() =>
                           Modal.confirm({
                             title: "Do you want to log out ?",
