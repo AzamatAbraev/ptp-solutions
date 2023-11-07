@@ -29,7 +29,6 @@ const PortfoliosPage = () => {
     search,
     total,
     page,
-    photo,
     data: portfolios,
     showModal,
     closeModal,
@@ -45,6 +44,7 @@ const PortfoliosPage = () => {
   useEffect(() => {
     getPortfolios();
   }, [getPortfolios]);
+
 
   const columns = [
     {

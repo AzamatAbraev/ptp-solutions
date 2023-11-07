@@ -13,7 +13,7 @@ const crud = <T>(url: string) => {
     search: string;
     total: number;
     loading: boolean;
-    data: T[] | null;
+    data: T[] | null | any;
     selected: null | string;
     isModalLoading: boolean;
     isModalOpen: boolean;
@@ -69,18 +69,15 @@ const crud = <T>(url: string) => {
 
           const {
             data: { pagination },
-          } = await request.get<T[]>(url, {
+          } = await request.get(url, {
             params,
           });
 
-          const { data } = await request.get<T[]>(url, {
+          const { data } = await request.get(url, {
             params: { ...params, page, limit: LIMIT },
           });
 
-          set({
-            data: data,
-            total: pagination.total,
-          });
+          set({ data, total: pagination.total });
         } finally {
           set({ loading: false });
         }

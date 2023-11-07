@@ -1,5 +1,5 @@
 export interface PortfolioType {
-  data: DataType[];
+  ["data"]: DataType[];
   pagination: { limit: number; page: number; next: number; total: number };
 }
 
@@ -11,6 +11,10 @@ export interface DataType {
   url: string;
   user: object;
   __v: number;
+}
+
+export interface Children {
+  children: React.ReactNode;
 }
 
 export interface PaginationType {
