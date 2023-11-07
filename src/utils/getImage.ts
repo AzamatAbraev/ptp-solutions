@@ -1,6 +1,8 @@
-export const getImage = (photo: { _id: string; name: string }) => {
+import { PhotoType } from "../types/portfolios";
+
+export const getImage = (photo: PhotoType) => {
   return `https://ap-portfolio-backend.up.railway.app/upload/${photo._id}.${
-    photo.name?.split(".")[1]
+    photo?.name?.split(".")[1]
   }`;
 };
 
