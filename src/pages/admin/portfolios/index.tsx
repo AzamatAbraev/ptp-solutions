@@ -30,6 +30,7 @@ const PortfoliosPage = () => {
     search,
     total,
     page,
+    photo,
     data: portfolios,
     showModal,
     closeModal,
@@ -45,6 +46,8 @@ const PortfoliosPage = () => {
   useEffect(() => {
     getPortfolios();
   }, [getPortfolios]);
+
+  let newPhoto = photo as any;
 
 
   const columns = [
@@ -119,7 +122,7 @@ const PortfoliosPage = () => {
   ];
 
   return (
-    <Spin spinning={loading}>
+    <Spin spinning={false}>
       <Table
         className="skills-table"
         scroll={{
@@ -231,7 +234,7 @@ const PortfoliosPage = () => {
               type="file"
               onChange={(e) => uploadPhoto(e)}
             />{" "}
-            {/* {photo ? <Image src={getImage(photo)} /> : null} */}
+            {photo ? <Image src={getImage(newPhoto)} /> : null}
           </div>
         </Form>
       </Modal>

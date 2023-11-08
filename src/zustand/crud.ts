@@ -7,6 +7,7 @@ import { LIMIT } from "../constants";
 import { request } from "../server";
 import { AxiosResponse } from "axios";
 import { getCookiesData } from "../utils/updateCookies";
+import { PhotoType } from "../types/portfolios";
 
 const crud = <T>(url: string) => {
   interface DataState {
@@ -20,7 +21,7 @@ const crud = <T>(url: string) => {
     isModalLoading: boolean;
     isModalOpen: boolean;
     page: number;
-    photo: AxiosResponse | null;
+    photo: AxiosResponse | PhotoType | null;
     uploadPhoto: (e: React.ChangeEvent<HTMLInputElement>) => void;
     handleSearch: (
       e: React.ChangeEvent<HTMLInputElement>,
@@ -110,7 +111,6 @@ const crud = <T>(url: string) => {
 
       showModal: (form) => {
         set({ isModalOpen: true, selected: null });
-
         form.resetFields();
       },
 
@@ -149,8 +149,9 @@ const crud = <T>(url: string) => {
 
       handleOk: async (form) => {
         try {
-          const { selected } = get();
+          const { selected, photo } = get();
           const values = await form.validateFields();
+          values.photo = photo;
 
           set({
             isModalLoading: true,
@@ -179,7 +180,7 @@ const crud = <T>(url: string) => {
         const target = e.target as HTMLInputElement;
         const file: File = (target.files as FileList)[0];
         formData.append("file", file);
-        const data = await request.post("upload", formData);
+        const {data} = await request.post("upload", formData);
         set({ photo: data });
       },
     };
