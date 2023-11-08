@@ -1,13 +1,12 @@
-import React from "react";
 import { NavigateFunction } from "react-router-dom";
 import { FormInstance } from "antd";
 
 import { create } from "zustand";
 
-import { LIMIT, ROLE, USER_ID } from "../constants";
+import { LIMIT } from "../constants";
 import { request } from "../server";
 import { AxiosResponse } from "axios";
-import Cookies from "js-cookie";
+import { getCookiesData } from "../utils/updateCookies";
 
 const crud = <T>(url: string) => {
   interface DataState {
@@ -39,10 +38,6 @@ const crud = <T>(url: string) => {
   const page = params.get("page") || 1;
   const search = params.get("search");
 
-  const role = Cookies.get(ROLE);
-  const userId = Cookies.get(USER_ID);
-  
-
   return create<DataState>()((set, get) => {
     return {
       search: search || "",
@@ -72,6 +67,7 @@ const crud = <T>(url: string) => {
 
       getData: async () => {
         try {
+          const { userId, role } = await getCookiesData();
           const { search, page } = get();
           const params = { search };
 

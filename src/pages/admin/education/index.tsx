@@ -54,7 +54,7 @@ const EducationPage = () => {
     const userIdFromCookies: string | undefined = Cookies.get(USER_ID);
     setUserId(userIdFromCookies);
     console.log(userId);
-  }, []);
+  }, [userId]);
 
   const columns = [
     {
