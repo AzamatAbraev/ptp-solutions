@@ -46,7 +46,11 @@ const useAuth = create<AuthType>()((set) => ({
       set({ role: user.role });
       request.defaults.headers.Authorization = `Bearer ${token}`;
       message.success("You are logged in");
-      navigate("/");
+      if (user.role === "admin") {
+        navigate("/dashboard");
+      } else {
+        navigate("/");
+      }
     } catch (err) {
       if (axios.isAxiosError(err)) {
         message.error(err.response?.data.message);

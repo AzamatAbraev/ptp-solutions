@@ -84,6 +84,14 @@ const PortfoliosPage = () => {
       key: "description",
     },
     {
+      title: "Posted by",
+      render: (
+        _: any,
+        row: { user: { firstName: string; lastName: string } }
+      ) =>
+        `${row?.user?.firstName ?? "Anonymous"} ${row?.user?.lastName ?? ""}`,
+    },
+    {
       title: "Action",
       dataIndex: "_id",
       key: "_id",

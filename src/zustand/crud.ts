@@ -60,6 +60,7 @@ const crud = <T>(url: string) => {
 
         navigate(`/${url}?` + query);
       },
+
       getData: async () => {
         try {
           const { search, page } = get();
@@ -111,7 +112,11 @@ const crud = <T>(url: string) => {
             isModalOpen: true,
           }));
           const { data } = await request.get(`${url}/${id}`);
-          form.setFieldsValue(data);
+          form.setFieldsValue({
+            ...data,
+            startDate: data?.startDate?.split("T")[0],
+            endDate: data?.endDate?.split("T")[0],
+          });
         } finally {
           set((state) => ({ ...state, selected: id, loading: false }));
         }

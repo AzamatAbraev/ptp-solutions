@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import {
   ClockCircleOutlined,
@@ -24,9 +24,9 @@ import useAuth from "../../../zustand/auth";
 import "./style.scss";
 
 const AdminLayout = () => {
+  const { pathname } = useLocation();
   const { role, logout } = useAuth();
   const [collapsed, setCollapsed] = useState(false);
-  // const {isFetching, notification, search, page, users, setNotification, setPage, handleSearch, upgradeToClient, getUsers} = useNotification();
   const navigate = useNavigate();
   return (
     <Layout>
@@ -43,7 +43,7 @@ const AdminLayout = () => {
           className="menu"
           theme="dark"
           mode="inline"
-          // defaultSelectedKeys={pathname}
+          defaultSelectedKeys={[pathname]}
           items={[
             {
               key: "/dashboard",
@@ -81,10 +81,10 @@ const AdminLayout = () => {
               ),
             },
             {
-              key: "/experience",
+              key: "/experiences",
               icon: <ClockCircleOutlined />,
               label: (
-                <Link to={role === "user" ? "/dashboard" : "/experience"}>
+                <Link to={role === "user" ? "/dashboard" : "/experiences"}>
                   Experience {role === "user" ? <LockOutlined /> : ""}
                 </Link>
               ),

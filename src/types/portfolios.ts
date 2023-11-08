@@ -1,5 +1,5 @@
 export interface PortfolioType {
-  ["data"]: DataType[];
+  data: DataType[];
   pagination: { limit: number; page: number; next: number; total: number };
 }
 

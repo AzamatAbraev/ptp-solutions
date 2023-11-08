@@ -45,6 +45,14 @@ const EducationPage = () => {
 
   const columns = [
     {
+      title: "Full name",
+      render: (
+        _: any,
+        row: { user: { firstName: string; lastName: string } }
+      ) =>
+        `${row?.user?.firstName ?? "Anonymous"} ${row?.user?.lastName ?? ""}`,
+    },
+    {
       title: "Education",
       dataIndex: "name",
       key: "name",
