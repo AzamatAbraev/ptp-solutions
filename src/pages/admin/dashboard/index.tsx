@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 const DashboardPage = () => {
   const { role } = useAuth();
+
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {

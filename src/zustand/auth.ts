@@ -46,7 +46,6 @@ const useAuth = create<AuthType>()((set) => ({
       set({ role: user.role });
       request.defaults.headers.Authorization = `Bearer ${token}`;
       message.success("You are logged in");
-      set({ isAuthenticated: true });
       if (user.role === "admin") {
         navigate("/dashboard");
       } else {
@@ -60,8 +59,8 @@ const useAuth = create<AuthType>()((set) => ({
   logout: (navigate) => {
     Cookies.remove(TOKEN);
     Cookies.remove(ROLE);
-    Cookies.set(USER_ID, "");
-    set({ accountInfo: [] });
+    Cookies.remove(USER_ID);
+    set({ accountInfo: [], role: null });
     navigate("/");
   },
 

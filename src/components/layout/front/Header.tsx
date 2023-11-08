@@ -31,13 +31,13 @@ const Header = () => {
               </li>
             ) : null}
             {isAuthenticated ? (
-              <Fragment>
+              <>
                 <li className="nav__item">
                   <Link className="nav__link" to="/account">
                     My Account
                   </Link>
                 </li>
-              </Fragment>
+              </>
             ) : (
               <Fragment>
                 <li className="nav__item">
