@@ -6,6 +6,13 @@
   color: #fff !important;
 }
 
+.dashboard-role-badge {
+  background-color: red;
+  font-size: 16px;
+  padding: 0px 4px 1px 4px;
+  border-radius: 4px;
+}
+
 .dashboard-account-badge {
   padding: 2px 5px;
   background-color: transparent;
@@ -107,7 +114,6 @@
     button {
       cursor: pointer;
       padding: 3px 5px;
-      // background-color: #1677ff;
       color: #fff;
       border: none;
       font-size: 16px;
@@ -120,7 +126,7 @@
   }
 
   .close-btn {
-    background-color: #1677ff;
+    // background-color: #1677ff;
     color: #fff;
     border-radius: 4px;
     padding: 5px 10px;

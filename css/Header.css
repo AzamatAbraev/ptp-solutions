@@ -1,5 +1,5 @@
 .nav {
-  background-color: #1677ff;
+  background-color: #001529;
   position: fixed;
   top: 0;
   right: 0;
@@ -37,7 +37,7 @@
 }
 .nav__link:hover {
   background-color: #fff;
-  color: #1677ff;
+  color: #001529;
 }
 .nav__link.active {
   opacity: 1;

@@ -7,6 +7,7 @@ import {
   Modal,
   Pagination,
   Space,
+  Spin,
   Table,
 } from "antd";
 import { Fragment, useEffect } from "react";
@@ -118,7 +119,7 @@ const PortfoliosPage = () => {
   ];
 
   return (
-    <Fragment>
+    <Spin spinning={loading}>
       <Table
         className="skills-table"
         scroll={{
@@ -234,7 +235,7 @@ const PortfoliosPage = () => {
           </div>
         </Form>
       </Modal>
-    </Fragment>
+    </Spin>
   );
 };
 

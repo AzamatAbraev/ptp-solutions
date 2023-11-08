@@ -4,16 +4,19 @@ import { FormInstance } from "antd";
 
 import { create } from "zustand";
 
-import { LIMIT } from "../constants";
+import { LIMIT, ROLE, USER_ID } from "../constants";
 import { request } from "../server";
 import { AxiosResponse } from "axios";
+import Cookies from "js-cookie";
 
 const crud = <T>(url: string) => {
   interface DataState {
     search: string;
     total: number;
+    totalUsers: number;
     loading: boolean;
     data: T[] | null | any;
+    sortedUsers: T[] | null | any;
     selected: null | string;
     isModalLoading: boolean;
     isModalOpen: boolean;
@@ -36,12 +39,18 @@ const crud = <T>(url: string) => {
   const page = params.get("page") || 1;
   const search = params.get("search");
 
+  const role = Cookies.get(ROLE);
+  const userId = Cookies.get(USER_ID);
+  
+
   return create<DataState>()((set, get) => {
     return {
       search: search || "",
       total: 0,
+      totalUsers: 0,
       loading: false,
       data: [],
+      sortedUsers: [],
       selected: null,
       isModalLoading: false,
       isModalOpen: false,
@@ -70,13 +79,19 @@ const crud = <T>(url: string) => {
 
           const {
             data: { pagination },
-          } = await request.get(url, {
-            params,
-          });
+          } = await request.get(
+            role === "admin" ? url : `${url}?user=${userId}`,
+            {
+              params,
+            }
+          );
 
-          const { data } = await request.get(url, {
-            params: { ...params, page, limit: LIMIT },
-          });
+          const { data } = await request.get(
+            role === "admin" ? url : `${url}?user=${userId}`,
+            {
+              params: { ...params, page, limit: LIMIT },
+            }
+          );
 
           set({ data, total: pagination.total });
         } finally {
@@ -146,7 +161,6 @@ const crud = <T>(url: string) => {
           });
 
           if (selected === null) {
-            // values.photo = get().photo;
             await request.post(url, values);
           } else {
             await request.put(`${url}/${selected}`, values);

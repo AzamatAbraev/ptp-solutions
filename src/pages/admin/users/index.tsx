@@ -9,7 +9,7 @@ import {
   Space,
   Table,
 } from "antd";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect } from "react";
 import { LIMIT } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { UserOutlined } from "@ant-design/icons/lib/icons";
@@ -22,7 +22,6 @@ import { longDate } from "../../../utils/dataConvert";
 const UsersPage = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
-  const [role, setRole] = useState("user");
 
   const {
     loading,
@@ -47,10 +46,6 @@ const UsersPage = () => {
     getUsers();
   }, [getUsers]);
 
-  const filterUsers = (value: string) => {
-    setRole(value);
-  };
-
   const columns = [
     {
       title: "Photo",
@@ -72,14 +67,6 @@ const UsersPage = () => {
       title: "Username",
       dataIndex: "username",
       key: "username",
-    },
-    {
-      title: "Date of birth",
-      dataIndex: "birthday",
-      key: "birthday",
-      render: (data: string) => (
-        <p style={{ marginBottom: "0px" }}>{data ? longDate(data) : "N/A"}</p>
-      ),
     },
     {
       title: "Account created",
@@ -148,7 +135,7 @@ const UsersPage = () => {
               align="center"
               justify="space-between"
             >
-              <h1 className="skills-title">{role}s</h1>
+              <h1 className="skills-title">Users</h1>
               <Input
                 className="search-input"
                 value={search}
@@ -163,7 +150,7 @@ const UsersPage = () => {
               />
               <Select
                 defaultValue="user"
-                onChange={filterUsers}
+                // onChange={() => sortUsers(e)}
                 style={{ width: 120, marginRight: "20px" }}
                 options={[
                   {
@@ -183,7 +170,7 @@ const UsersPage = () => {
             </Flex>
             <div>
               <p className="search-result-text">
-                About <span>{total}</span> {role}s found
+                About <span>{total}</span> results found
               </p>
             </div>
           </Fragment>

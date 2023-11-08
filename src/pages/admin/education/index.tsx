@@ -1,3 +1,7 @@
+import { Fragment, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
+
 import {
   Button,
   Flex,
@@ -6,12 +10,12 @@ import {
   Modal,
   Pagination,
   Space,
+  Spin,
   Table,
 } from "antd";
-import { Fragment, useEffect } from "react";
-import { LIMIT } from "../../../constants";
-import { useNavigate } from "react-router-dom";
+
 import useEducation from "../../../zustand/education";
+import { LIMIT, USER_ID } from "../../../constants";
 import { longDate } from "../../../utils/dataConvert";
 
 import "./style.scss";
@@ -19,6 +23,8 @@ import "./style.scss";
 const EducationPage = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
+  const [userId, setUserId] = useState<String | undefined>(undefined);
+
 
   const {
     loading,
@@ -42,6 +48,13 @@ const EducationPage = () => {
   useEffect(() => {
     getEducation();
   }, [getEducation]);
+
+
+  useEffect(() => {
+    const userIdFromCookies: string | undefined = Cookies.get(USER_ID);
+    setUserId(userIdFromCookies);
+    console.log(userId);
+  }, []);
 
   const columns = [
     {
@@ -115,7 +128,7 @@ const EducationPage = () => {
   ];
 
   return (
-    <Fragment>
+    <Spin spinning={loading}>
       <Table
         className="skills-table"
         scroll={{
@@ -248,7 +261,7 @@ const EducationPage = () => {
           </Flex>
         </Form>
       </Modal>
-    </Fragment>
+    </Spin>
   );
 };
 

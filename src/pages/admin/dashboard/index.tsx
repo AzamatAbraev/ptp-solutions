@@ -3,11 +3,26 @@ import { Spin } from "antd";
 import "./style.scss";
 
 import useAuth from "../../../zustand/auth";
+import { useEffect, useState } from "react";
 
 const DashboardPage = () => {
-  const {role} = useAuth();
+  const { role } = useAuth();
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const timerId = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, []);
+  
   return (
-    <Spin spinning={false}>
+    <Spin spinning={isLoading}>
       <section>
         <div className="container">
           <div className="main-stats">

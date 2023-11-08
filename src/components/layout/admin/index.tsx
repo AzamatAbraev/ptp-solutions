@@ -5,7 +5,6 @@ import {
   ClockCircleOutlined,
   DatabaseOutlined,
   LockOutlined,
-  LogoutOutlined,
   MenuFoldOutlined,
   ReadOutlined,
   TeamOutlined,
@@ -13,7 +12,7 @@ import {
   WhatsAppOutlined,
 } from "@ant-design/icons";
 
-import { Layout, Menu, Button, Modal, Badge, Flex } from "antd";
+import { Layout, Menu, Button, Modal, Badge, Flex, message } from "antd";
 
 import Sider from "antd/es/layout/Sider";
 import account from "../../../assets/images/account.svg";
@@ -28,6 +27,7 @@ const AdminLayout = () => {
   const { role, logout } = useAuth();
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
+
   return (
     <Layout>
       <Sider
@@ -48,7 +48,14 @@ const AdminLayout = () => {
             {
               key: "/dashboard",
               icon: <UserOutlined />,
-              label: <Link to="/dashboard">Dashboard</Link>,
+              label: (
+                <Link to="/dashboard">
+                  Dashboard{" "}
+                  <span className="dashboard-role-badge">
+                    {role?.charAt(0).toUpperCase()}
+                  </span>
+                </Link>
+              ),
             },
             role === "admin"
               ? {
@@ -62,20 +69,22 @@ const AdminLayout = () => {
                   ),
                 }
               : null,
-            {
-              key: "/portfolios",
-              icon: <DatabaseOutlined />,
-              label: (
-                <Link to={role === "user" ? "/dashboard" : "/portfolios"}>
-                  Portfolios {role === "user" ? <LockOutlined /> : ""}
-                </Link>
-              ),
-            },
+
             {
               key: "/education",
               icon: <ReadOutlined />,
               label: (
-                <Link to={role === "user" ? "/dashboard" : "/education"}>
+                <Link
+                  onClick={
+                    role === "user"
+                      ? () =>
+                          message.error(
+                            "Only clients can add their credentials"
+                          )
+                      : undefined
+                  }
+                  to={role === "user" ? "/dashboard" : "/education"}
+                >
                   Education {role === "user" ? <LockOutlined /> : ""}
                 </Link>
               ),
@@ -84,8 +93,37 @@ const AdminLayout = () => {
               key: "/experiences",
               icon: <ClockCircleOutlined />,
               label: (
-                <Link to={role === "user" ? "/dashboard" : "/experiences"}>
+                <Link
+                  onClick={
+                    role === "user"
+                      ? () =>
+                          message.error(
+                            "Only clients can add their credentials"
+                          )
+                      : undefined
+                  }
+                  to={role === "user" ? "/dashboard" : "/experiences"}
+                >
                   Experience {role === "user" ? <LockOutlined /> : ""}
+                </Link>
+              ),
+            },
+            {
+              key: "/portfolios",
+              icon: <DatabaseOutlined />,
+              label: (
+                <Link
+                  onClick={
+                    role === "user"
+                      ? () =>
+                          message.error(
+                            "Only clients can add their credentials"
+                          )
+                      : undefined
+                  }
+                  to={role === "user" ? "/dashboard" : "/portfolios"}
+                >
+                  Portfolios {role === "user" ? <LockOutlined /> : ""}
                 </Link>
               ),
             },
@@ -93,7 +131,17 @@ const AdminLayout = () => {
               key: "/skills",
               icon: <LockOutlined />,
               label: (
-                <Link to={role === "user" ? "/dashboard" : "/skills"}>
+                <Link
+                  onClick={
+                    role === "user"
+                      ? () =>
+                          message.error(
+                            "Only clients can add their credentials"
+                          )
+                      : undefined
+                  }
+                  to={role === "user" ? "/dashboard" : "/skills"}
+                >
                   Skills {role === "user" ? <LockOutlined /> : ""}
                 </Link>
               ),
@@ -107,9 +155,11 @@ const AdminLayout = () => {
               : null,
             {
               key: "4",
-              icon: <LogoutOutlined />,
               label: (
                 <Button
+                  type="primary"
+                  danger
+                  style={{ width: "100%" }}
                   onClick={() =>
                     Modal.confirm({
                       title: "Do you want to log out ?",
